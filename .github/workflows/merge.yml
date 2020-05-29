@@ -11,17 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Find the values
-      run: |
-        echo "Git Ref: $GITHUB_REF"
-        echo "Workspace: $GITHUB_WORKSPACE"
-        echo "Event Name: $GITHUB_EVENT_NAME"
-        echo "Owner: $GITHUB_REPOSITORY_OWNER"
-        echo "Repo: $GITHUB_REPOSITORY"
-
     - name: PING - Dispatch initiating repository event
       run: |
         curl -X POST https://api.github.com/repos/erikdeirdre/test_repo_2/dispatches \
         -H 'Accept: application/vnd.github.everest-preview+json' \
+        -H "Content-Type: application/json" \
         -u ${{ secrets.ACCESS_TOKEN }} \
         --data '{"event_type": "version_change", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}
