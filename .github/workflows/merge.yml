@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run a one-line script
+    - name: Find the values
       run: |
         echo "Git Ref: $GITHUB_REF"
         echo "Workspace: $GITHUB_WORKSPACE"
