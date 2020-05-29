@@ -1,33 +1,26 @@
-# This is a basic workflow to help you get started with Actions
+name: merge-job
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    types: [closed, edited]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  merge-job:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
     - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        echo "Git Ref: $GITHUB_REF"
+        echo "Workspace: $GITHUB_WORKSPACE"
+        echo "Event Name: $GITHUB_EVENT_NAME"
+        echo "Owner: $GITHUB_REPOSITORY_OWNER"
+        echo "Repo: $GITHUB_REPOSITORY"
+#    - name: PING - Dispatch initiating repository event
+#      run: |
+#        curl -X POST https://api.github.com/repos/marcnuri-demo/actions-remote-dispatch-b/dispatches \
+#        -H 'Accept: application/vnd.github.everest-preview+json' \
+#        -u ${{ secrets.ACCESS_TOKEN }} \
+#        --data '{"event_type": "ping", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}
