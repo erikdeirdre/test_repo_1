@@ -13,6 +13,10 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: file contents
+      run: |
+        cat VERSION
+        
     - name: git hustory
       run: |
         git log VERSION
