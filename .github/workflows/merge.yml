@@ -15,7 +15,7 @@ jobs:
         
     - name: Compare versions
       run: |
-        DIFF=$(git diff $GITHUB_HEAD_REF origin/master  -- VERSION)
+        DIFF=$(git diff origin/$GITHUB_HEAD_REF origin/master  -- VERSION)
         if [[ -z "$DIFF" ]]; then
           IFS='.'; read -r -a array <<< "$(cat VERSION)"
           CNT="${array[1]}"
