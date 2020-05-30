@@ -12,10 +12,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-
-    - name: git hustory
-      run: |
-        git diff $GITHUB_HEAD_REF $GITHUB_HEAD_REF -- VERSION
         
     - name: Compare versions
       run: |
@@ -24,7 +20,7 @@ jobs:
           IFS='.'; read -r -a array <<< "$(cat VERSION)"
           CNT="${array[1]}"
           ((CNT++))
-          echo "${array[0].${CNT}.${array[2]}"
+          echo "${array[0]}.${CNT}.${array[2]}"
         fi
 
     - name: PING - Dispatch initiating repository event
