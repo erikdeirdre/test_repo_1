@@ -13,6 +13,7 @@ jobs:
 
     - name: Echo info
       run: |
+        echo "info"
         echo "HEAD REF: ${GITHUB_HEAD_REF}"
         echo "BASE REF: ${GITHUB_BASE_REF}"
         echo "REF: ${GITHUB_REF}"
