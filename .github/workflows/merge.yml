@@ -26,15 +26,11 @@ jobs:
           echo ::set-env name=VERSION_CHANGE::1
         fi
 
-    - name: Print version value   
-      run:
-        echo ${{ env.VERSION_CHANGE }}
-
     - name: Commit Updated Version File
       if: env.VERSION_CHANGE == 1
       run: |
         git add VERSION
-        git commit -m "Updated the VERSION file
+        git commit -m "Updated VERSION file"
   
     - name: Push changes to master
       if: env.VERSION_CHANGE == 1
