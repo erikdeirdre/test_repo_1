@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 0
+        fetch-depth: 5
 
     - name: git history
       run: |
@@ -23,5 +23,5 @@ jobs:
           IFS='.'; read -r -a array <<< $(cat VERSION)
           CNT="${array[1]}"
           ((CNT++))
-          echo "${array[0].${CNT}.${array[2]}"
+          echo "${array[0]}.${CNT}.${array[2]}"
         fi
