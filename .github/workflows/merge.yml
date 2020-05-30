@@ -14,7 +14,7 @@ jobs:
         fetch-depth: 0
 
 # turn the detached message off
-git config --global advice.detachedHead false
+#git config --global advice.detachedHead false
 
     - name: Echo info
       run: |
