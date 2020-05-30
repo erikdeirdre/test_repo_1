@@ -16,6 +16,7 @@ jobs:
     - name: Increment Version if same as Master
       id: version
       run: |
+        echo ::set-output name=version::0
         DIFF=$(git diff origin/$GITHUB_HEAD_REF origin/master  -- VERSION)
         if [[ -z "$DIFF" ]]; then
           IFS='.'; read -r -a array <<< "$(cat VERSION)"
@@ -27,7 +28,7 @@ jobs:
 
     - name: Print version value   
       run:
-        echo steps.id.version.version
+        echo ${{steps.id.version.version}}
 
     - name: Commit Updated Version File
       if: steps.id.version.version == 1
