@@ -13,16 +13,9 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Fetch all history for all tags and branches
-      run: git fetch
-      
-    - name: file contents
-      run: |
-        cat VERSION
-
     - name: git hustory
       run: |
-        git diff master master -- VERSION
+        git diff $GITHUB_HEAD_REF $GITHUB_HEAD_REF -- VERSION
         
     - name: Compare versions
       run: |
