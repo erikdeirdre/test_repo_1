@@ -25,14 +25,18 @@ jobs:
           echo ::set-output name=version::1
         fi
 
+    - name: Print version value   
+      run:
+        echo steps.id.version.version
+
     - name: Commit Updated Version File
-      if: steps.id.version.key == 1
+      if: steps.id.version.version == 1
       run: |
         git add VERSION
         git commit -m "Updated the VERSION file
   
     - name: Push changes to master
-      if: steps.id.version.key == 1
+      if: steps.id.version.version == 1
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
