@@ -1,0 +1,27 @@
+name: push-job
+
+on:
+  push:
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: git history
+      run: |
+        git diff $GITHUB_HEAD_REF $GITHUB_HEAD_REF -- VERSION
+        
+    - name: Compare versions
+      run: |
+        DIFF=$(git diff $GITHUB_HEAD_REF master  -- VERSION)
+        if [[ -z "$DIFF" ]]; then
+          IFS='.'; read -r -a array <<< "$(cat VERSION)
+          CNT="${array[1]}"
+          ((CNT++))
+          echo "${array[0].${CNT}.${array[2]}"
+        fi
