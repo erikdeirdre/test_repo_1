@@ -11,17 +11,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Find the values
+    - name: Echo info
       run: |
-        echo "Git Ref: $GITHUB_REF"
-        echo "Workspace: $GITHUB_WORKSPACE"
-        echo "Event Name: $GITHUB_EVENT_NAME"
-        echo "Owner: $GITHUB_REPOSITORY_OWNER"
-        echo "Repo: $GITHUB_REPOSITORY"
+        echo "HEAD REF: ${GITHUB_HEAD_REF}"
+        echo "BASE REF: ${GITHUB_BASE_REF}"
+        echo "REF: ${GITHUB_REF}"
+
+    - name: Compare versions
+      run: |
+        DIFF=$(git diff $GITHUB_HEAD_REF master  -- VERSION)
+        if [[ -z "$DIFF" ]]; then
+          IFS='.'; read -r -a array <<< "$(cat VERSION)
+          CNT="${array[1]}"
+          ((CNT++))
+          echo "${array[0].${CNT}.${array[2]}"
+        fi
 
     - name: PING - Dispatch initiating repository event
       run: |
         curl -X POST https://api.github.com/repos/erikdeirdre/test_repo_2/dispatches \
         -H 'Accept: application/vnd.github.everest-preview+json' \
+        -H 'Content-Type: application/json' \
         -u ${{ secrets.ACCESS_TOKEN }} \
-        --data '{"event_type": "version_change", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}
+        --data '{"event_type": "version_change", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
