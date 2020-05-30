@@ -11,6 +11,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Compare versions
+      run: |
+        DIFF=$(git diff $GITHUB_HEAD_REF master  -- VERSION)
+        if [[ -z "$DIFF" ]]; then
+          IFS='.'; read -r -a array <<< "$(cat VERSION)
+          CNT="${array[1]}"
+          ((CNT++))
+          echo "${array[0].${CNT}.${array[2]}"
+        fi
+
     - name: PING - Dispatch initiating repository event
       run: |
         curl -X POST https://api.github.com/repos/erikdeirdre/test_repo_2/dispatches \
