@@ -16,10 +16,10 @@ jobs:
     - name: file contents
       run: |
         cat VERSION
-        
+
     - name: git hustory
       run: |
-        git log VERSION
+        git diff version-merge-4 master -- VERSION
         
     - name: Compare versions
       run: |
