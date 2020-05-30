@@ -19,7 +19,7 @@ jobs:
 
     - name: git hustory
       run: |
-        git diff version-merge-4 master -- VERSION
+        git diff master master -- VERSION
         
     - name: Compare versions
       run: |
