@@ -16,28 +16,28 @@ jobs:
     - name: Increment Version if same as Master
       id: version
       run: |
-        echo ::set-output name=version::0
+        echo ::set-env name=VERSION_CHANGE::0
         DIFF=$(git diff origin/$GITHUB_HEAD_REF origin/master  -- VERSION)
         if [[ -z "$DIFF" ]]; then
           IFS='.'; read -r -a array <<< "$(cat VERSION)"
           CNT="${array[1]}"
           ((CNT++))
           echo "${array[0]}.${CNT}.${array[2]}" >VERSION
-          echo ::set-output name=version::1
+          echo ::set-env name=VERSION_CHANGE::1
         fi
 
     - name: Print version value   
       run:
-        echo ${{steps.id.version.version}}
+        echo ${{ env.VERSION_CHANGE }}
 
     - name: Commit Updated Version File
-      if: steps.id.version.version == 1
+      if: env.VERSION_CHANGE == 1
       run: |
         git add VERSION
         git commit -m "Updated the VERSION file
   
     - name: Push changes to master
-      if: steps.id.version.version == 1
+      if: env.VERSION_CHANGE == 1
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
