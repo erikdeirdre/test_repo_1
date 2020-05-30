@@ -13,16 +13,10 @@ jobs:
       with:
         fetch-depth: 0
 
-# turn the detached message off
-#git config --global advice.detachedHead false
-
-    - name: Echo info
+    - name: git hustory
       run: |
-        echo "info"
-        echo "HEAD REF: ${GITHUB_HEAD_REF}"
-        echo "BASE REF: ${GITHUB_BASE_REF}"
-        echo "REF: ${GITHUB_REF}"
-
+        git log VERSION
+        
     - name: Compare versions
       run: |
         DIFF=$(git diff $GITHUB_HEAD_REF master  -- VERSION)
