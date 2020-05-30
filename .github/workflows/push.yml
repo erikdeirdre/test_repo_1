@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 5
+        fetch-depth: 0
 
     - name: git history
       run: |
