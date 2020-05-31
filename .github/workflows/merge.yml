@@ -30,7 +30,7 @@ jobs:
       if: env.VERSION_CHANGE == 1
       run: |
         git config --local user.email ${{ secrets.USER_EMAIL }}
-        git config --local user.name ${{ GITHUB_ACTOR }}
+        git config --local user.name ${GITHUB_ACTOR}
         git add VERSION
         git commit -m "Updated VERSION file"
   
