@@ -21,6 +21,6 @@ jobs:
       env:
         TAG_NAME: "$(cat VERSION)"
       run: |
-        echo ::set-env name=TAG_NAME::$TAG_NAME
+        echo ::set-env name=IMAGE_NAME::"${{ env.TAG_NAME }}"
         echo "TAG: ${{ env.TAG_NAME }}"
-        echo "${{ env.TAG_NAME }}:latest"
+        echo "${{ env.IMAGE_NAME }}:latest"
