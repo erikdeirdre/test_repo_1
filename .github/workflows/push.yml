@@ -16,12 +16,8 @@ jobs:
       run: |
         git diff $GITHUB_HEAD_REF origin/master -- VERSION
         
-    - name: Compare versions
+    - name: Increment Version if same as Master
+      id: version
       run: |
-        DIFF=$(git diff $GITHUB_HEAD_REF origin/master  -- VERSION)
-        if [[ -z "$DIFF" ]]; then
-          IFS='.'; read -r -a array <<< $(cat VERSION)
-          CNT="${array[1]}"
-          ((CNT++))
-          echo "${array[0]}.${CNT}.${array[2]}"
-        fi
+        echo ::set-env name=VERSION::$(cat VERSION)
+        echo "TAG: ${{ env.VERSION }}"
