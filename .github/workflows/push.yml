@@ -18,10 +18,11 @@ jobs:
         
     - name: Increment Version if same as Master
       id: version
+      env:
+        VERSION: "$(cat VERSION)"
       run: |
         cat VERSION
         VER=$(cat VERSION)
         echo "VER: ${VER}"
-        echo ::set-env name=VERSION::"$(cat VERSION)"
         echo "TAG: ${{ env.VERSION }}"
         echo "TAG2: ${VERSION}"
