@@ -19,13 +19,8 @@ jobs:
     - name: Increment Version if same as Master
       id: version
       env:
-        VER: "$(cat VERSION)"
+        TAG_NAME: "$(cat VERSION)"
       run: |
-        echo ::set-env name=VERSION::$VER
-        echo "TAG: ${{ env.VERSION }}"
-        echo "TAG2: ${{ env.VER }}"
-
-    - name: Increment Version
-      run: |
-        echo "VER: ${{ env.VER }}"
-        echo "VERSION: ${{ env.VERSION }}"
+        echo ::set-env name=TAG_NAME::$TAG_NAME
+        echo "TAG: ${{ env.TAG_NAME }}"
+        echo "${{ env.TAG_NAME }}:latest"
