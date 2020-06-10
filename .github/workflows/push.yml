@@ -24,3 +24,4 @@ jobs:
         echo "VER: ${VER}"
         echo ::set-env name=VERSION::"$(cat VERSION)"
         echo "TAG: ${{ env.VERSION }}"
+        echo "TAG2: ${VERSION}"
