@@ -26,3 +26,7 @@ jobs:
         echo "VER: ${VER}"
         echo "TAG: ${{ env.VERSION }}"
         echo "TAG2: ${VERSION}"
+
+    - name: Increment Version if same as Master
+      run: |
+        echo "VER: ${{ env.VERSION }}"
