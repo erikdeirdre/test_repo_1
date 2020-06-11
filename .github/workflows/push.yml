@@ -24,3 +24,7 @@ jobs:
         echo ::set-env name=IMAGE_NAME::"${{ env.TAG_NAME }}"
         echo "TAG: ${{ env.TAG_NAME }}"
         echo "${{ env.IMAGE_NAME }}:latest"
+
+    - name: Echo image name
+      run: |
+        echo "${{ env.IMAGE_NAME }}:latest"
