@@ -8,4 +8,4 @@ if [[ "$DIFF" ]]; then
     ((CNT++))
     echo "${array[0]}.${CNT}.${array[2]}"
 fi
-echo "here"
+echo "here 33"
